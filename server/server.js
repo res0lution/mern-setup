@@ -15,7 +15,7 @@ app.get('/', (req, res) => {
   })
 
 let port = process.env.PORT || 3000
-app.listen(port, function onStart(err) {
+app.listen(port, err => {
 
   if (err) {
     console.log(err)
@@ -24,8 +24,10 @@ app.listen(port, function onStart(err) {
   console.info("Server started on port %s.", port)
 })
 
-const url = process.env.MONGODB_URI || "mongodb://localhost:27017/mernSimpleSetup"
-MongoClient.connect(url, (err, db) => {
-  console.log("Connected successfully to mongodb server")
-  db.close()
-})
+const url = process.env.MONGODB_URI || "mongodb://localhost:27017/mernSetup"
+MongoClient.connect(url, { useNewUrlParser: true, useUnifiedTopology: true },
+  (err, db) => {
+    console.log("Connected successfully to mongodb server")
+    db.close()
+  }
+)
